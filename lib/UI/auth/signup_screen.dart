@@ -37,6 +37,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             email: emailController.text.toString(),
             password: passwordController.text.toString())
         .then((value) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
       setState(() {
         loading = false;
       });
@@ -97,8 +99,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // suffixIcon: Icon(   Icons.visibility : Icons.visibility_off )
                       ),
                       validator: (value) {
-                        if (value == null || value!.isEmpty) {
+                        if (value!.isEmpty) {
                           return "Enter Password";
+                        }
+                        if (value.length < 8) {
+                          return 'Password must be at least 8 characters long';
+                        }
+                        if (!value.contains(RegExp(r'[A-Z]'))) {
+                          return 'Password must contain at least one uppercase letter';
+                        }
+                        if (!value.contains(RegExp(r'[a-z]'))) {
+                          return 'Password must contain at least one lowercase letter';
+                        }
+                        if (!value.contains(RegExp(r'[0-9]'))) {
+                          return 'Password must contain at least one digit';
+                        }
+                        if (!value
+                            .contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                          return 'Password must contain at least one special character';
                         }
                         return null;
                       },

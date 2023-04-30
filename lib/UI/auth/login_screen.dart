@@ -1,7 +1,12 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:moody/UI/auth/signup_screen.dart';
+import 'package:moody/UI/posts/post_screen.dart';
 import 'package:moody/Widgets/round_button.dart';
+import 'package:moody/utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,15 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  @override
-  bool _obscureText = true;
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   _obscureText = true;
-  // }
+  final _auth = FirebaseAuth.instance;
+  bool loading = false;
 
   @override
   void dispose() {
@@ -34,10 +32,28 @@ class _LoginScreenState extends State<LoginScreen> {
         .dispose(); // means jab ye screen nai rhegi aap inko memory se dispose krdo
   }
 
-  // bool _obscureText = true;
-  void _togglePass() {
+  void login() {
     setState(() {
-      _obscureText = !_obscureText;
+      loading = true;
+    });
+    _auth
+        .signInWithEmailAndPassword(
+            email: emailController.text.toString(),
+            password: passwordController.text.toString())
+        .then((value) {
+      Utils().toastMessage(value.user!.email.toString());
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const PostScreen()));
+      setState(() {
+        loading = false;
+      });
+    }).onError((error, stackTrace) {
+      debugPrint(error
+          .toString()); //When the app goes in production mode, the statements like errors and all get commented out and are not shown, which prevents the app from slowing down.
+      Utils().toastMessage(error.toString());
+      setState(() {
+        loading = false;
+      });
     });
   }
 
@@ -89,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextFormField(
                         keyboardType: TextInputType.text,
                         controller: passwordController,
-                        obscureText: _obscureText,
+                        obscureText: true,
                         decoration: const InputDecoration(
                           hintText: "Password",
                           helperText: "Enter valid password",
@@ -108,8 +124,11 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 50),
               RoundButton(
                 title: "Login",
+                loading: loading,
                 onTap: () {
-                  if (_formKey.currentState!.validate()) {}
+                  if (_formKey.currentState!.validate()) {
+                    login();
+                  }
                 },
               ),
               const SizedBox(
