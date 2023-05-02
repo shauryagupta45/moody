@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
-  bool loading = false;
+  bool loading =  false;
 
   @override
   void dispose() {
