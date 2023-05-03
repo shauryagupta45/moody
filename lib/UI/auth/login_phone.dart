@@ -19,7 +19,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -56,11 +56,13 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                       },
                       codeSent: (String verificationId, int? token) {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => VerifyCodeScreen(
-                                      verificationId: verificationId,
-                                    )));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VerifyCodeScreen(
+                              verificationId: verificationId,
+                            ),
+                          ),
+                        );
                       },
                       codeAutoRetrievalTimeout: (e) {
                         Utils().toastMessage(e);

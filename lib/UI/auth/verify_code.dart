@@ -31,7 +31,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
               controller: verificationCodeController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
-                hintText: " Enter 6 Digit Code",
+                hintText: " 6 Digit Code",
               ),
             ),
             const SizedBox(height: 50),
@@ -48,6 +48,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
 
                 try {
                   await auth.signInWithCredential(credentials);
+
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PostScreen()));
                 } catch (e) {
