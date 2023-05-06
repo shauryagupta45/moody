@@ -16,7 +16,7 @@ class _PostScreenState extends State<PostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle  : true ; 
+        centerTitle  : true ,
         title: const Text('Moody Post'),
         actions: [
           IconButton(
