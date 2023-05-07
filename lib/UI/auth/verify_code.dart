@@ -48,7 +48,6 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
 
                 try {
                   await auth.signInWithCredential(credentials);
-
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PostScreen()));
                 } catch (e) {

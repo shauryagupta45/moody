@@ -25,7 +25,7 @@ class RoundButton extends StatelessWidget {
                   strokeWidth: 2, color: Colors.white)
               : Text(
                   title,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
         ),
       ),

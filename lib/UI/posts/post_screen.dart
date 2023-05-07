@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:moody/UI/auth/login_screen.dart';
+import 'package:moody/UI/posts/add_posts.dart';
 import 'package:moody/utils/utils.dart';
 
 class PostScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _PostScreenState extends State<PostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Moody Post'),
         actions: [
           IconButton(
@@ -40,6 +42,13 @@ class _PostScreenState extends State<PostScreen> {
             width: 10,
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AddPostScreen()));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
