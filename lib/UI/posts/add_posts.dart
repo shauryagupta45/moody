@@ -17,6 +17,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Note : In hot reload, changes are accepted from this line onwards
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -58,9 +59,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 setState(() {
                   loading = true;
                 });
-                databaseRef.child('1').set({
-                  'id': 1,
+
+                databaseRef
+                    .child(DateTime.now().millisecondsSinceEpoch.toString())
+                    .set({
                   'title': postController.text.toString(),
+                  'id': DateTime.now().millisecondsSinceEpoch.toString(),
                 }).then((value) {
                   Utils().toastMessage('Post Added');
                   setState(() {
