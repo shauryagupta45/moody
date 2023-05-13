@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
-  bool loading =  false;
+  bool loading = false;
 
   @override
   void dispose() {
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           automaticallyImplyLeading:
               false, // remove the back going arrow, since it is the starting screen
-          title: const Text('Login'),
+          title: const Text(' Login '),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
