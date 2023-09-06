@@ -9,9 +9,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
   SplashServices splashScreen = SplashServices();
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();

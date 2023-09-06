@@ -12,6 +12,8 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
   bool loading = false;
+
+  //Note that we are using firebase realtime database in here, not firebase storage, for this we use the library firebase_database
   final databaseRef = FirebaseDatabase.instance.ref('Post');
   final postController = TextEditingController();
 
@@ -60,11 +62,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   loading = true;
                 });
 
-                databaseRef
-                    .child(DateTime.now().millisecondsSinceEpoch.toString())
-                    .set({
+                String id = DateTime.now().millisecondsSinceEpoch.toString();
+
+                // We have used this variable, since, if we write this in every place, we'll have different id bcoz, we are calculating time in milli seconds
+                databaseRef.child(id).set({
                   'title': postController.text.toString(),
-                  'id': DateTime.now().millisecondsSinceEpoch.toString(),
+                  'id': id,
                 }).then((value) {
                   Utils().toastMessage('Post Added');
                   setState(() {

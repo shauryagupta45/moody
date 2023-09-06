@@ -48,8 +48,10 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
 
                 try {
                   await auth.signInWithCredential(credentials);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PostScreen()));
+                  Navigator.push(
+                      BuildContext as BuildContext,
+                      MaterialPageRoute(
+                          builder: (context) => const PostScreen()));
                 } catch (e) {
                   setState(() {
                     loading = false;
