@@ -107,6 +107,13 @@ class _PostScreenState extends State<PostScreen> {
                         PopupMenuItem(
                           value: 2,
                           child: ListTile(
+                            onTap: () {
+                              Navigator.pop(
+                                  context); // This will automatically close the popupmenu that opened up using trailing option dots
+                              ref
+                                  .child(snapshot.child('id').value.toString())
+                                  .remove();
+                            },
                             leading: Icon(Icons.delete),
                             title: Text("Delete"),
                           ),
@@ -120,6 +127,35 @@ class _PostScreenState extends State<PostScreen> {
                   return ListTile(
                     title: Text(snapshot.child('title').value.toString()),
                     subtitle: Text(snapshot.child('id').value.toString()),
+                    trailing: PopupMenuButton(
+                      icon: const Icon(Icons.more_vert),
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: 1,
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.pop(context);
+                              showMyDialog(
+                                  title, snapshot.child('id').value.toString());
+                            },
+                            leading: Icon(Icons.edit),
+                            title: Text("Edit"),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: 2,
+                          child: ListTile(
+                            onTap: () {
+                              ref
+                                  .child(snapshot.child('id').value.toString())
+                                  .remove();
+                            },
+                            leading: Icon(Icons.delete),
+                            title: Text("Delete"),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 } else {
                   return Container();
