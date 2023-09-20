@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:moody/UI/auth/login_screen.dart';
 import 'package:moody/UI/posts/post_screen.dart';
+import 'package:moody/firestore/firestore_listScreen.dart';
 
 class SplashServices {
   void isLogin(BuildContext context) {
@@ -13,8 +14,10 @@ class SplashServices {
     if (user != null) {
       Timer(
           const Duration(seconds: 3),
-          () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PostScreen())));
+          () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const FireStoreScreen())));
     } else {
       Timer(
           const Duration(seconds: 3),

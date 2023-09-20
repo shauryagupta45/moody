@@ -132,6 +132,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUpScreen()));
+                  },
+                  child: const Text("Forgot Password?"),
+                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -168,7 +180,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: const Text("Sign Up"))
                 ],
-              )
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
